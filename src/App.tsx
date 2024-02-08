@@ -1,9 +1,9 @@
-import React, { Suspense, useState, useEffect } from 'react';
+import React, { Suspense, useContext } from 'react';
+import { ChapterContext } from './ChapterContext';
 import './App.css';
 
 function App() {
-  let query = new URLSearchParams(window.location.search);
-  let chapter = query.get('chapter') || 'default';
+  const chapter = useContext(ChapterContext);
 
   // 例：http://localhost:5174/?chapter=1
   const ChapterComponent = React.lazy(
@@ -14,9 +14,11 @@ function App() {
 
   return (
     <div>
-      <Suspense fallback={<div>Loading chapter...</div>}>
-        <ChapterComponent />
-      </Suspense>
+      <ChapterContext.Provider value={chapter}>
+        <Suspense fallback={<div>Loading chapter{chapter}...</div>}>
+          <ChapterComponent />
+        </Suspense>
+      </ChapterContext.Provider>
     </div>
   );
 }
