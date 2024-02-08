@@ -1,4 +1,5 @@
-function Button({ handleClick, children }) {
+// レイヤー 1/3
+function Button({ handleClick, children }: { handleClick: () => void, children: React.ReactNode }) {
   return (
     <button onClick={handleClick}>
       {children}
@@ -6,18 +7,13 @@ function Button({ handleClick, children }) {
   )
 }
 
-// メソッド系、次に低レイヤーで 2/3
-// function UploadButton(object) { console.log(object) }
-// {text: 'アップロードする'} を引数として受け取っているので
-// デストラクチャリングして text の値を抜き取っている
-function UploadButton({ text }) {
-  // コンポーネント内の関数はイベントハンドラと呼ばれ、onXXで始まるのが一般的
+// レイヤー 2/3 画像アップロードボタン
+function UploadButton({ text }: { text: string }) {
   function onUpload() {
     console.log(`${text}画像アップロードしております`)
   }
 
   return (
-    // onClick である必要はなく onXXをこのボタンの概念に基づいて変更して良い
     <Button handleClick={onUpload}>
       {text}アップロードボタン
     </Button>
@@ -25,7 +21,7 @@ function UploadButton({ text }) {
 }
 
 // レイヤー 2/3 他の処理をするボタン
-function PlayButton({ text }) {
+function PlayButton({ text }: { text: string }) {
   function onPlay() {
     console.log(`${text}を再生してます`)
   }
@@ -37,7 +33,7 @@ function PlayButton({ text }) {
   )
 }
 
-function DeleteButton({ text }) {
+function DeleteButton({ text }: { text: string }) {
   return (
     <Button handleClick={() => { console.log(`${text}を削除しました`) }}>
       {text}コンテンツを削除しました。
@@ -45,7 +41,7 @@ function DeleteButton({ text }) {
   )
 }
 
-function Toolbar({ contents }) {
+function Toolbar({ contents }: { contents: string[] }) {
   return (
     contents.map((content, index) => (
       <div key={index} style={marginTop10Px()}>
