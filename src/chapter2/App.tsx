@@ -1,3 +1,19 @@
+import { useContext } from 'react'
+import { ChapterContext } from '../ChapterContext'
+
+// 最上位コンポーネント 3/3
+export default function App() {
+  const chapter = useContext(ChapterContext);
+  const contents = ['1個目', '2個目', '3個目', '4個目']
+
+  return (
+    <>
+      <h1>Chapter {chapter}：イベントハンドラ</h1>
+      <Toolbar contents={contents} />
+    </>
+  )
+}
+
 // レイヤー 1/3
 function Button({ handleClick, children }: { handleClick: () => void, children: React.ReactNode }) {
   return (
@@ -50,17 +66,6 @@ function Toolbar({ contents }: { contents: string[] }) {
         <DeleteButton text={content} /><br />
       </div>
     ))
-  )
-}
-
-// 最上位コンポーネント 3/3
-export default function App() {
-  const contents = ['1個目', '2個目', '3個目', '4個目']
-
-  return (
-    <>
-      <Toolbar contents={contents} />
-    </>
   )
 }
 
