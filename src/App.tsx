@@ -5,7 +5,7 @@ import { ConsoleLogViewer } from './lib/ConsoleLogViewer';
 const App: React.FC = () => {
   const chapter = useContext(ChapterContext);
   const ChapterComponent = React.lazy(() => 
-    import(`./chapters/Chapter${chapter}/App`).catch(() => ({
+    import(`./chapters/Chapter${chapter}/Chapter${chapter}`).catch(() => ({
       default: () => <div className="text-red-500">チャプターの読み込みに失敗しました。</div>
     }))
   );

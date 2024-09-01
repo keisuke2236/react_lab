@@ -1,4 +1,4 @@
-# 始め方
+# Usage
 
 ```sh 
 npm install
@@ -16,6 +16,25 @@ src/chapters/_chapterTemplate をコピーし chapter1 など命名
 http://localhost:5173/?chapter=1 フォルダ名と同様のgetパラメータをつけてアクセス
 
 Console.logの表示があります、サイズ調整はボタンで可能です。
+
+## ワンコマンドセットアップ
+chapter 数字 を入れるだけでコピーしてURLを表示し、vscodeで開きます。
+最後3行がURLを表示し、vscodeで開き、ブラウザも開く処理なので不要であればコメントアウト。
+bash.rc | zsh.rc に入れても良い。
+
+```zsh
+function chapter() {
+  if [[ ! $1 =~ ^[0-9]+$ ]]; then echo "Usage: copychap <number>"; return 1; fi
+  cp -R src/chapters/_chapterXX src/chapters/chapter$1 &&
+  mv src/chapters/chapter$1/ChapterXX.tsx src/chapters/chapter$1/Chapter$1.tsx &&
+  sed -i '' "s/XX/$1/g" src/chapters/chapter$1/Chapter$1.tsx &&
+  echo "http://localhost:5173/?chapter=$1"
+  open "http://localhost:5173/?chapter=$1"
+  code "src/chapters/chapter$1/Chapter$1.tsx"
+}
+
+chapter 1
+```
 
 
 # React + TypeScript + Vite
