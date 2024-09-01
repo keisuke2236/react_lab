@@ -5,10 +5,14 @@ import { ChapterContext } from '../../lib/ChapterContext';
 export default function App() {
   const chapter = useContext(ChapterContext);
   return (
-    <div>
+    <>
       <h1>Chapter {chapter}：Reactのライフサイクル</h1>
-      <Counter />
-    </div>
+      <div className="flex flex-wrap justify-center items-center gap-4 p-4">
+        <div className="flex-grow basis-1/2 md:basis-1/3 lg:basis-1/4 p-4 m-2">
+          <Counter />
+        </div>
+      </div>
+    </>
   );
 }
 
@@ -29,7 +33,7 @@ function Counter() {
 
   return (
     <div>
-      <p>Count: {count}</p>
+      <p className='mb-4'>Count: {count}</p>
       <button onClick={() => setCount(count + 1)}>Increment</button>
     </div>
   );

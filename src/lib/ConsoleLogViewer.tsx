@@ -26,7 +26,7 @@ export const ConsoleLogViewer: React.FC = () => {
   return (
     <div className="fixed top-0 right-0 h-full bg-gray-500 p-2 overflow-auto" style={{ width }}>
       <h2 className="text-lg font-bold mb-2">Console Logs</h2>
-      {widthList.map(width => ( <WidthChangeButton key={width} width={`${width}px`} /> ))}
+      {widthList.map(width => ( <WidthChangeButton key={width} width={width} /> ))}
       <div className="rounded-md bg-black mb-2 p-2">
         {logs.map((log, index) => (
           <div key={index} className="mb-1 font-mono text-sm">{log}</div>

@@ -5,6 +5,19 @@ npm install
 npm run dev
 ```
 
+URLを開く  
+
+```
+http://localhost:5173/?chapter=1
+```
+
+src/chapters/_chapterTemplate をコピーし chapter1 など命名
+
+http://localhost:5173/?chapter=1 フォルダ名と同様のgetパラメータをつけてアクセス
+
+Console.logの表示があります、サイズ調整はボタンで可能です。
+
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
