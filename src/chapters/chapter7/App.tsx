@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useContext } from 'react';
-import { ChapterContext } from '../ChapterContext';
+import { ChapterContext } from '../../lib/ChapterContext';
 
 export default function App() {
   const chapter = useContext(ChapterContext);

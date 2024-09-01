@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { ChapterContext } from '../ChapterContext'
+import { ChapterContext } from '../../lib/ChapterContext'
 
 // 最上位コンポーネント 3/3
 export default function App() {

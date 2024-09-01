@@ -1,5 +1,5 @@
 import { useContext } from 'react';
-import { ChapterContext } from '../ChapterContext';
+import { ChapterContext } from '../../lib/ChapterContext';
 import { useState, useEffect } from 'react';
 
 export default function App() {
