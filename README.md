@@ -1,30 +1,56 @@
-# Usage
+# React + TypeScript + Vite + Bun プロジェクト
 
-```sh 
-npm install
-npm run dev
+このプロジェクトは、高速で効率的な開発体験を提供するBunをJavaScriptランタイムおよびパッケージマネージャーとして使用しています。
+
+## セットアップと使用方法
+
+### 前提 bun の install
+npm の早い version です、入れましょう。
+
+```
+curl -fsSL https://bun.sh/install | bash
 ```
 
-URLを開く  
 
+### 基本的な使い方
+
+1. 依存関係のインストール:
+   ```sh
+   bun install
+   ```
+
+2. 開発サーバーの起動:
+   ```sh
+   bun run dev
+   ```
+
+3. ブラウザでアクセス:
+   ```
+   http://localhost:5173/?chapter=1
+   ```
+
+### リンターとフォーマッター
+
+コードの品質を維持するために、以下のコマンドを使用します：
+
+```sh
+bun run lint    # リンターの実行
+bun run format  # フォーマッターの実行
 ```
-http://localhost:5173/?chapter=1
-```
 
-src/chapters/_chapterTemplate をコピーし chapter1 など命名
+## チャプターの作成と管理
 
-http://localhost:5173/?chapter=1 フォルダ名と同様のgetパラメータをつけてアクセス
+1. `src/chapters/_chapterTemplate` をコピーし、`chapter1` などの名前に変更します。
+2. フォルダ名と同じGETパラメータをURLに付けてアクセスします（例：`http://localhost:5173/?chapter=1`）。
+3. Console.logの表示が可能で、サイズ調整ボタンも用意されています。
 
-Console.logの表示があります、サイズ調整はボタンで可能です。
+### ワンコマンドセットアップ
 
-## ワンコマンドセットアップ
-chapter 数字 を入れるだけでコピーしてURLを表示し、vscodeで開きます。
-最後3行がURLを表示し、vscodeで開き、ブラウザも開く処理なので不要であればコメントアウト。
-bash.rc | zsh.rc に入れても良い。
+以下の関数を `.bashrc` または `.zshrc` に追加すると、チャプターの作成が簡単になります：
 
 ```zsh
 function chapter() {
-  if [[ ! $1 =~ ^[0-9]+$ ]]; then echo "Usage: copychap <number>"; return 1; fi
+  if [[ ! $1 =~ ^[0-9]+$ ]]; then echo "使い方: chapter <数字>"; return 1; fi
   cp -R src/chapters/_chapterXX src/chapters/chapter$1 &&
   mv src/chapters/chapter$1/ChapterXX.tsx src/chapters/chapter$1/Chapter$1.tsx &&
   sed -i '' "s/XX/$1/g" src/chapters/chapter$1/Chapter$1.tsx &&
@@ -32,38 +58,25 @@ function chapter() {
   open "http://localhost:5173/?chapter=$1"
   code "src/chapters/chapter$1/Chapter$1.tsx"
 }
+```
 
+使用例：
+```
 chapter 1
 ```
 
+これにより、テンプレートのコピー、名前の変更、VSCodeでの開封、ブラウザでの表示が自動で行われます。
 
-# React + TypeScript + Vite
+## プロジェクトの構成
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+- **Vite**: 高速な開発サーバーとビルドツール
+- **React**: ユーザーインターフェース構築のためのライブラリ
+- **TypeScript**: 型安全な JavaScript の上位集合
+- **Bun**: 高速な JavaScript ランタイムとパッケージマネージャー
 
-Currently, two official plugins are available:
+## Bunに関する注意点
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- `.bun` ディレクトリがキャッシュと依存関係の管理に使用されます。`.gitignore` に追加してください。
+- `bun.lockb` というバイナリのロックファイルが生成されます。これはバージョン管理に含めるべきです。
+- TypeScriptプロジェクトの場合、`tsconfig.json` に `"types": ["bun-types"]` を追加してBunの型定義を利用できます。
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
-```
-
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
