@@ -60,7 +60,7 @@ function chapter() {
 }
 ```
 
-使用例：
+使用例
 ```
 chapter 1
 ```
@@ -80,3 +80,34 @@ chapter 1
 - `bun.lockb` というバイナリのロックファイルが生成されます。これはバージョン管理に含めるべきです。
 - TypeScriptプロジェクトの場合、`tsconfig.json` に `"types": ["bun-types"]` を追加してBunの型定義を利用できます。
 
+
+# React Ariaの使用
+このプロジェクトではReact Ariaを使用して、アクセシブルなUIコンポーネントを作成します。主要なパッケージとして以下をインストールしています
+
+```
+@react-aria/interactions
+@react-aria/focus
+@react-stately/toggle
+```
+
+これらのパッケージを使用して、アクセシビリティに配慮したインタラクティブなUIを簡単に実装できます。
+
+例えば、ボタンコンポーネントを作成する場合  
+
+```
+tsxCopyimport { useButton } from '@react-aria/button';
+import { useRef } from 'react';
+
+function Button(props) {
+  let ref = useRef();
+  let { buttonProps } = useButton(props, ref);
+  
+  return (
+    <button {...buttonProps} ref={ref}>
+      {props.children}
+    </button>
+  );
+}
+```
+
+React Ariaの詳細な使用方法については、公式ドキュメントを参照してください。

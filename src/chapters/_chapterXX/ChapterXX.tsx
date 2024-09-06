@@ -5,11 +5,14 @@ export default function App() {
   const chapter = useContext(ChapterContext);
   return (
     <>
-      <h1>Chapter {chapter}：チャプタータイトル</h1>
+      <h1 className="text-2xl font-bold mb-4" id={`chapter-${chapter}-title`}>
+        Chapter {chapter}：チャプタータイトル
+      </h1>
       <div className="flex flex-wrap justify-center items-center gap-4 p-4">
-        <div className="flex-grow basis-1/2 md:basis-1/3 lg:basis-1/4 p-4 m-2">
-          {/* コンテンツ */}
-        </div>
+        <>
+          コンテンツがここに入ります
+          {console.log('Hello, world!')}
+        </>
       </div>
     </>
   );
