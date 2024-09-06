@@ -5,7 +5,35 @@ React + TypeScript + Vite + Bun + React Aria + biome + Tailwind
 React Ariaを活用してアクセシビリティに優れたUIコンポーネントを構築します。また、Biomeを使用してコードの品質とフォーマットを管理しています。
 
 ## セットアップと使用方法
+以下を実行すれば完了です。
 
+```
+git clone git@github.com:keisuke2236/react_typescript_sample.git
+cd ./react_typescript_sample
+curl -fsSL https://bun.sh/install | bash
+bun i
+# チャプター作成コマンドを設定（zshrcなどに書いておきましょう）
+function chapter() {
+  if [[ ! $1 =~ ^[0-9]+$ ]]; then echo "使い方: chapter <数字>"; return 1; fi
+  cp -R src/chapters/_chapterXX src/chapters/chapter$1 &&
+  mv src/chapters/chapter$1/ChapterXX.tsx src/chapters/chapter$1/Chapter$1.tsx &&
+  sed -i '' "s/XX/$1/g" src/chapters/chapter$1/Chapter$1.tsx &&
+  echo "http://localhost:2236/?chapter=$1"
+  open "http://localhost:2236/?chapter=$1"
+  code "src/chapters/chapter$1/Chapter$1.tsx"
+}
+bun run dev &
+# チャプターを作成
+chapter 1
+```
+
+止めたいとき
+
+```
+pkill -f "bun run dev"
+```
+
+## 以下解説
 ### 前提条件: Bunのインストール
 
 Bunは高速なJavaScriptランタイムおよびパッケージマネージャーです。以下のコマンドでインストールできます：
@@ -28,7 +56,7 @@ curl -fsSL https://bun.sh/install | bash
 
 3. ブラウザでアクセス:
    ```
-   http://localhost:5173/?chapter=1
+   http://localhost:2236/?chapter=1
    ```
 
 ### リンターとフォーマッター (Biome)
@@ -47,7 +75,7 @@ Biomeの設定は `biome.json` ファイルで管理されています。必要�
 ## チャプターの作成と管理
 
 1. `src/chapters/_chapterTemplate` をコピーし、`chapter1` などの名前に変更します。
-2. フォルダ名と同じGETパラメータをURLに付けてアクセスします（例：`http://localhost:5173/?chapter=1`）。
+2. フォルダ名と同じGETパラメータをURLに付けてアクセスします（例：`http://localhost:2236/?chapter=1`）。
 3. Console.logの表示が可能で、サイズ調整ボタンも用意されています。
 
 ### ワンコマンドセットアップ
@@ -60,8 +88,8 @@ function chapter() {
   cp -R src/chapters/_chapterXX src/chapters/chapter$1 &&
   mv src/chapters/chapter$1/ChapterXX.tsx src/chapters/chapter$1/Chapter$1.tsx &&
   sed -i '' "s/XX/$1/g" src/chapters/chapter$1/Chapter$1.tsx &&
-  echo "http://localhost:5173/?chapter=$1"
-  open "http://localhost:5173/?chapter=$1"
+  echo "http://localhost:2236/?chapter=$1"
+  open "http://localhost:2236/?chapter=$1"
   code "src/chapters/chapter$1/Chapter$1.tsx"
 }
 ```

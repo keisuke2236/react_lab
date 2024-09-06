@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "bun run vite",
+    "dev": "bun run vite --port 2236",
     "build": "bun run tsc && bun run vite build",
     "lint": "bun run biome lint .",
     "format": "bun run biome format . --write",
