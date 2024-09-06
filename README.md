@@ -1,16 +1,18 @@
-# React + TypeScript + Vite + Bun プロジェクト
+# React を学ぶ時にデバッグして遊べるリポジトリ
+React + TypeScript + Vite + Bun + React Aria + biome + Tailwind
 
-このプロジェクトは、高速で効率的な開発体験を提供するBunをJavaScriptランタイムおよびパッケージマネージャーとして使用しています。
+このプロジェクトは、高速で効率的な開発体験を提供するBunをJavaScriptランタイムおよびパッケージマネージャーとして使用し
+React Ariaを活用してアクセシビリティに優れたUIコンポーネントを構築します。また、Biomeを使用してコードの品質とフォーマットを管理しています。
 
 ## セットアップと使用方法
 
-### 前提 bun の install
-npm の早い version です、入れましょう。
+### 前提条件: Bunのインストール
 
-```
+Bunは高速なJavaScriptランタイムおよびパッケージマネージャーです。以下のコマンドでインストールできます：
+
+```bash
 curl -fsSL https://bun.sh/install | bash
 ```
-
 
 ### 基本的な使い方
 
@@ -29,14 +31,18 @@ curl -fsSL https://bun.sh/install | bash
    http://localhost:5173/?chapter=1
    ```
 
-### リンターとフォーマッター
+### リンターとフォーマッター (Biome)
+
+このプロジェクトではBiomeをリンターとフォーマッターとして使用しています。Biomeは高速で設定が簡単なコード品質ツールです。
 
 コードの品質を維持するために、以下のコマンドを使用します：
 
 ```sh
-bun run lint    # リンターの実行
-bun run format  # フォーマッターの実行
+bun run lint    # Biomeリンターの実行
+bun run format  # Biomeフォーマッターの実行
 ```
+
+Biomeの設定は `biome.json` ファイルで管理されています。必要に応じてこのファイルを編集し、プロジェクトの要件に合わせてカスタマイズできます。
 
 ## チャプターの作成と管理
 
@@ -60,7 +66,7 @@ function chapter() {
 }
 ```
 
-使用例
+使用例:
 ```
 chapter 1
 ```
@@ -71,8 +77,10 @@ chapter 1
 
 - **Vite**: 高速な開発サーバーとビルドツール
 - **React**: ユーザーインターフェース構築のためのライブラリ
-- **TypeScript**: 型安全な JavaScript の上位集合
-- **Bun**: 高速な JavaScript ランタイムとパッケージマネージャー
+- **TypeScript**: 型安全なJavaScriptの上位集合
+- **Bun**: 高速なJavaScriptランタイムとパッケージマネージャー
+- **React Aria**: アクセシブルなUIコンポーネント作成のためのフックライブラリ
+- **Biome**: 高速で設定が簡単なJavaScriptツールチェーン（リンター、フォーマッター）
 
 ## Bunに関する注意点
 
@@ -80,34 +88,46 @@ chapter 1
 - `bun.lockb` というバイナリのロックファイルが生成されます。これはバージョン管理に含めるべきです。
 - TypeScriptプロジェクトの場合、`tsconfig.json` に `"types": ["bun-types"]` を追加してBunの型定義を利用できます。
 
+## React Ariaの使用
 
-# React Ariaの使用
-このプロジェクトではReact Ariaを使用して、アクセシブルなUIコンポーネントを作成します。主要なパッケージとして以下をインストールしています
+https://react-spectrum.adobe.com/react-aria/index.html
 
-```
-@react-aria/interactions
-@react-aria/focus
-@react-stately/toggle
-```
+Adobeが開発するUIライブラリで、簡単に使えるのでちょっと良さげなパーツ入れたい時に便利。
 
-これらのパッケージを使用して、アクセシビリティに配慮したインタラクティブなUIを簡単に実装できます。
-
-例えば、ボタンコンポーネントを作成する場合  
+このプロジェクトではReact Ariaを使用して、アクセシブルなUIコンポーネントを作成します。主要なパッケージとして以下を使用しています：
 
 ```
-tsxCopyimport { useButton } from '@react-aria/button';
-import { useRef } from 'react';
+react-aria-components
+```
 
-function Button(props) {
-  let ref = useRef();
-  let { buttonProps } = useButton(props, ref);
-  
+これにより、アクセシビリティに配慮したインタラクティブなUIを簡単に実装できます。
+
+例えば、ボタンコンポーネントを作成する場合：
+
+```tsx
+import { Button } from 'react-aria-components';
+
+function MyButton(props) {
   return (
-    <button {...buttonProps} ref={ref}>
+    <Button {...props}>
       {props.children}
-    </button>
+    </Button>
   );
 }
 ```
 
-React Ariaの詳細な使用方法については、公式ドキュメントを参照してください。
+React Ariaの詳細な使用方法については、[公式ドキュメント](https://react-spectrum.adobe.com/react-aria/)を参照してください。
+
+## CSS
+css は Tailwind を採用してます。
+
+## Console Log Viewer
+
+このプロジェクトには、カスタムのコンソールログビューアが含まれています。以下の特徴があります：
+
+- リアルタイムでのコンソールログの表示
+- ANSIエスケープシーケンスの適切な処理
+- ログのフィルタリングと重複排除
+- 表示幅の調整機能
+
+Console Log Viewerの使用方法や詳細については、関連するコンポーネントのドキュメントを参照してください。
