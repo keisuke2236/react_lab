@@ -10,7 +10,8 @@ export default function App() {
       </h1>
       <div className="flex flex-wrap justify-center items-center gap-4 p-4">
         <>
-          コンテンツがここに入ります
+          コンテンツがレンダリングされるたびに実行されるので
+          どんどんConsoleの表示内容が増えていきますよね。
           {console.log('Hello, world!')}
         </>
       </div>

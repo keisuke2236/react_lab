@@ -83,9 +83,16 @@ export const ConsoleLogViewer: React.FC = () => {
         ))}
       </div>
       <div
-        className="rounded-lg bg-black p-4 overflow-y-auto"
+        className="rounded-lg bg-black p-4 overflow-y-auto relative"
         style={{ height: 'calc(100% - 100px)' }}
       >
+        <Button
+          onPress={() => setLogs([])}
+          className="py-0 text-white top-0 right-0 absolute mt-2 mr-2"
+        >
+          クリア
+        </Button>
+
         {logs.map(({ id, content }) => (
           <div key={id} className="mb-2 font-mono text-sm">
             {content}
