@@ -13,11 +13,22 @@
     "enabled": true,
     "formatWithErrors": false,
     "indentStyle": "space",
-    "lineWidth": 80
+    "lineWidth": 130,
+    "lineEnding": "lf"
   },
   "javascript": {
     "formatter": {
-      "quoteStyle": "single"
+      "quoteStyle": "single",
+      "jsxQuoteStyle": "double",
+      "arrowParentheses": "asNeeded",
+      "bracketSameLine": true,
+      "bracketSpacing": true,
+      "lineWidth": 130
+    }
+  },
+  "json": {
+    "parser": {
+      "allowComments": true
     }
   }
 }

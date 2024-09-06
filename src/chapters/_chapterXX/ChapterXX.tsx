@@ -10,7 +10,7 @@ export default function App() {
       </h1>
       <div className="flex flex-wrap justify-center items-center gap-4 p-4">
         <>
-          コンテンツがここに入ります
+          以下のようにConsole.logを実行すると右側にログが表示されます
           {console.log('Hello, world!')}
         </>
       </div>

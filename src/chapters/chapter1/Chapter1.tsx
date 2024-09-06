@@ -8,10 +8,11 @@ export default function App() {
       <h1 className="text-2xl font-bold mb-4" id={`chapter-${chapter}-title`}>
         Chapter {chapter}：チャプタータイトル
       </h1>
-      <div className="flex flex-wrap justify-center items-center gap-4 p-4">
+      <div className="flex gap-2 p-4 flex-col">
         <>
-          コンテンツがレンダリングされるたびに実行されるので
-          どんどんConsoleの表示内容が増えていきますよね。
+          <p>src/chapters/chapter1/Chapter1.tsxを開いてください</p>
+          <p>以下のようにConsole.logを実行すると右側にログが表示されます</p>
+          <p>console.log('Hello, world!')</p>
           {console.log('Hello, world!')}
         </>
       </div>

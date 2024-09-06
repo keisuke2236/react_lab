@@ -9,9 +9,7 @@ type Width = '1000px' | '800px' | '600px' | '400px' | '200px';
 const stripAnsi = (str: string) => str.replace(/\u001b\[.*?m/g, '');
 const isValidLog = (log: string) => {
   const stripped = stripAnsi(log).trim();
-  return (
-    stripped !== '' && !stripped.startsWith('%s') && !stripped.endsWith('%s')
-  );
+  return stripped !== '' && !stripped.startsWith('%s') && !stripped.endsWith('%s');
 };
 
 export const ConsoleLogViewer: React.FC = () => {
@@ -25,7 +23,7 @@ export const ConsoleLogViewer: React.FC = () => {
     newLog
       .split('\n')
       .filter(isValidLog)
-      .forEach((line) => {
+      .forEach(line => {
         pendingLogsRef.current.add({
           id: `${Date.now()}-${Math.random()}`,
           content: stripAnsi(line),
@@ -36,11 +34,7 @@ export const ConsoleLogViewer: React.FC = () => {
     if (timeoutIdRef.current !== null) clearTimeout(timeoutIdRef.current);
 
     timeoutIdRef.current = window.setTimeout(() => {
-      setLogs((prevLogs) =>
-        [...prevLogs, ...Array.from(pendingLogsRef.current)].sort(
-          (a, b) => a.timestamp - b.timestamp,
-        ),
-      );
+      setLogs(prevLogs => [...prevLogs, ...Array.from(pendingLogsRef.current)].sort((a, b) => a.timestamp - b.timestamp));
       pendingLogsRef.current.clear();
       timeoutIdRef.current = null;
     }, 100);
@@ -49,13 +43,7 @@ export const ConsoleLogViewer: React.FC = () => {
   useEffect(() => {
     const originalConsoleLog = console.log;
     console.log = (...args: unknown[]) => {
-      addLog(
-        args
-          .map((arg) =>
-            typeof arg === 'object' ? JSON.stringify(arg) : String(arg),
-          )
-          .join(' '),
-      );
+      addLog(args.map(arg => (typeof arg === 'object' ? JSON.stringify(arg) : String(arg))).join(' '));
       originalConsoleLog.apply(console, args);
     };
 
@@ -66,30 +54,17 @@ export const ConsoleLogViewer: React.FC = () => {
   }, [addLog]);
 
   return (
-    <div
-      className="fixed top-0 right-0 h-full bg-gray-800 text-white p-4 overflow-auto"
-      style={{ width }}
-    >
+    <div className="fixed top-0 right-0 h-full bg-gray-800 text-white p-4 overflow-auto" style={{ width }}>
       <h2 className="text-xl font-bold mb-4">Console Logs</h2>
       <div className="mb-4">
-        {(['1000px', '800px', '600px', '400px', '200px'] as const).map((w) => (
-          <Button
-            key={w}
-            onPress={() => setWidth(w)}
-            className="mr-2 mb-2 px-3 py-1 bg-blue-500 text-white rounded"
-          >
+        {(['1000px', '800px', '600px', '400px', '200px'] as const).map(w => (
+          <Button key={w} onPress={() => setWidth(w)} className="mr-2 mb-2 px-3 py-1 bg-blue-500 text-white rounded">
             {w}
           </Button>
         ))}
       </div>
-      <div
-        className="rounded-lg bg-black p-4 overflow-y-auto relative"
-        style={{ height: 'calc(100% - 100px)' }}
-      >
-        <Button
-          onPress={() => setLogs([])}
-          className="py-0 text-white top-0 right-0 absolute mt-2 mr-2"
-        >
+      <div className="rounded-lg bg-black p-4 overflow-y-auto relative" style={{ height: 'calc(100% - 100px)' }}>
+        <Button onPress={() => setLogs([])} className="py-0 text-white top-0 right-0 absolute mt-2 mr-2">
           クリア
         </Button>
 
